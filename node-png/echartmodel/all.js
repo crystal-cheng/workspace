@@ -1,0 +1,781 @@
+'use strict';
+
+const echarts = require('echarts');
+
+class All extends Model {
+
+
+    //总值图
+    createZongZhiTu(obj) {
+
+        // 总值图修饰
+        function detectionData(str) {
+            var color = new echarts.graphic.LinearGradient(0, 0, 1, 1, [{
+                offset: 0,
+                color: 'rgba(81, 130,228, 1)'
+            }, {
+                offset: 0.5,
+                color: 'rgba(81, 130,228, 1)'
+            }, {
+                offset: 1,
+                color: 'rgba(81, 130,228, 1)'
+            }]);
+
+            if (str >= 30 && str <= 60) {
+                color = new echarts.graphic.LinearGradient(0, 0, 1, 1, [{
+                    offset: 0,
+                    color: 'rgba(248, 141,72, 1)'
+                }, {
+                    offset: 0.5,
+                    color: 'rgba(248, 141,72, 1)'
+                }, {
+                    offset: 1,
+                    color: 'rgba(248, 141,72, 1)'
+                }]);
+            } else if (str > 60) {
+                color = new echarts.graphic.LinearGradient(0, 0, 1, 1, [{
+                    offset: 0,
+                    color: 'rgba(243, 83,82, 1)'
+                }, {
+                    offset: 0.5,
+                    color: 'rgba(243, 83,82, 1)'
+                }, {
+                    offset: 1,
+                    color: 'rgba(243, 83,82, 1)'
+                }]);
+            }
+            return color;
+        }
+
+        const options = {
+            renderAsImage: true,
+            animation: true,
+            title: {
+                text: obj.title
+            },
+            backgroundColor: '#fff',
+            tooltip: {
+                formatter: '{a} <br/>{b} : {c}%'
+            },
+            series: [{
+                name: '仪盘表',
+                type: 'gauge',
+                splitNumber: 60,
+                axisLine: {
+                    lineStyle: {
+                        color: [[0.31, '#fff'], [1, '#fff']],
+                        width: 48
+                    },
+                },
+                axisTick: {
+                    lineStyle: {
+                        color: '#e7e9ed',
+                        width: 2
+                    },
+                    length: 48,
+                    splitNumber: 2
+                },
+                pointer: {           // 分隔线
+                    shadowColor: '#fff', // 默认透明
+                    shadowBlur: 5,
+                    show: false
+                },
+                axisLabel: {
+                    distance: 10,
+                    textStyle: {
+                        color: '#fff'
+                    },
+                    show: false,
+                },
+                splitLine: {
+                    show: false
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#494f50'
+                    }
+                },
+                detail: {
+                    formatter: '{value}%',
+                    offsetCenter: [0, '30%'],
+                    textStyle: {
+                        fontSize: 24,
+                        color: '#bbc5d5'
+                    }
+                },
+                title: {
+                    offsetCenter: [0, '60%']
+                },
+                data: [{
+                    name: '总数值',
+                    value: obj.seriesData
+                }]
+            }]
+        };
+
+        var value = options.series[0].data[0].value;
+        options.series[0].axisLine.lineStyle.color[0][0] = value / 100;
+        options.series[0].axisLine.lineStyle.color[0][1] = detectionData(value);
+        return options;
+    }
+
+    // 控制图
+    createKongZhiTu(obj) {
+        const options = {
+            title: {
+                text: obj.title,
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
+                }
+            },
+            legend: {
+                data: obj.legendData,
+                type: 'scroll',
+                show: obj.showLegend,
+                x: 'center',
+                y: 'top'
+            },
+            grid: {
+                left: '5%',
+                right: '5%',
+                containLabel: true
+            },
+            xAxis: {
+                name: obj.xAxisName,
+                nameLocation: 'middle',
+                nameGap: '60',
+                type: 'category',
+                boundaryGap: true,
+                data: obj.xAxisData,
+                axisLabel: {
+                    show: true,
+                    rotate: 45,
+                    formatter: function(param) {
+                        if (param.length > 7) {
+                            param = param.substr(0, 7) + '..';
+                        }
+                        return param;
+                    }
+                },
+                nameTextStyle: {
+                    padding: [0, 0, 0, 0]
+                }
+            },
+            yAxis: {
+                name: obj.yAxisName,
+                nameLocation: 'end',
+                nameGap: '15',
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value}'
+                },
+                axisPointer: {
+                    snap: true
+                },
+                nameTextStyle: {
+                    padding: [0, 0, 0, 40]
+                }
+            },
+            series: [
+                {
+                    name: '数值',
+                    type: 'line',
+                    smooth: false,
+                    data: obj.seriesData
+                }
+            ]
+        };
+
+        return options;
+
+    }
+
+    // 地图
+    createDiTu(obj) {
+        const options = {
+            renderAsImage: true,
+            animation: true,
+            title: {
+                text: obj.title,
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: function(params) {
+                    var result = '',
+                        value = params.value;
+
+                    if (isNaN(value)) {
+                        result = params.name;
+                    } else {
+                        result = params.seriesName + ' - ' + params.name + ' : ' + value;
+                    }
+                    return result;
+                }
+            },
+            legend: {
+                orient: 'vertical',
+                type: 'scroll',
+                x: 'center',
+                y: 'top',
+                show: obj.showLegend,
+                data: obj.legendData
+            },
+            series: obj.seriesData
+        };
+
+        return options;
+    }
+
+    // 堆积图
+    createDuiJiZhuZhuangTu(obj) {
+        var options = {
+            renderAsImage: true,
+            animation: true,
+            title: {
+                text: obj.title
+            },
+            tooltip: {},
+            legend: {
+                data: obj.legendData,
+                type: 'scroll',
+                show: obj.showLegend,
+                x: 'center',
+                y: 'top'
+            },
+            grid: {
+                left: '5%',
+                right: '5%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    name: obj.xAxisName,
+                    nameLocation: 'middle',
+                    nameGap: '60',
+                    type: 'category',
+                    data: obj.xAxisData,
+                    boundaryGap: true,
+                    axisLabel: {
+                        show: true,
+                        rotate: 45,
+                        formatter: function(param) {
+                            if (param.length > 7) {
+                                param = param.substr(0, 7) + '..';
+                            }
+                            return param;
+                        }
+                    },
+                    nameTextStyle: {
+                        padding: [0, 0, 0, 0]
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    name: obj.yAxisName,
+                    nameLocation: 'end',
+                    nameGap: '15',
+                    type: 'value',
+                    nameTextStyle: {
+                        padding: [0, 0, 0, 40]
+                    }
+                }
+            ],
+            dataZoom: [
+                {
+                    show: false,
+                    type: 'inside', //inside 为拖动效果
+                    //type: 'slider',//slider为手动更新效果
+                    realtime: true,
+                    filterMode: 'filter',
+                    start: 0,
+                    end: 100,
+                    xAxisIndex: 0
+                }
+            ],
+            series: obj.seriesData
+        };
+
+        return options;
+    }
+
+    // 趋势图
+    createQuShiTu(obj) {
+        const options = {
+            renderAsImage: true,
+            animation: true,
+            title: {
+                text: obj.title
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: obj.legendData,
+                type: 'scroll',
+                show: obj.showLegend,
+                x: 'center',
+                y: 'top'
+            },
+            grid: {
+                left: '5%',
+                right: '5%',
+                containLabel: true
+            },
+            xAxis: {
+                name: obj.xAxisName,
+                nameLocation: 'middle',
+                nameGap: '60',
+                type: 'category',
+                boundaryGap: true,
+                data: obj.xAxisData,
+                axisLabel: {
+                    show: true,
+                    rotate: 45,
+                    formatter: function(param) {
+                        if (param.length > 7) {
+                            param = param.substr(0, 7) + '..';
+                        }
+                        return param;
+                    }
+                },
+                nameTextStyle: {
+                    padding: [0, 0, 0, 0]
+                }
+            },
+            yAxis: {
+                name: obj.yAxisName,
+                nameLocation: 'end',
+                nameGap: '15',
+                type: 'value',
+                nameTextStyle: {
+                    padding: [0, 0, 0, 40]
+                }
+            },
+            dataZoom: [
+                {
+                    show: false,
+                    type: 'inside', //inside 为拖动效果
+                    realtime: true,
+                    filterMode: 'filter',
+                    start: 0,
+                    end: 100,
+                    xAxisIndex: 0
+                }
+            ],
+            series: obj.seriesData
+        };
+
+        return options;
+    }
+
+    // 散点图
+    createSanDianTu(obj) {
+        const options = {
+            renderAsImage: true,
+            animation: true,
+            title: {
+                text: obj.title,
+            },
+            tooltip: {
+                trigger: 'item',
+                showDelay: 0,
+                formatter: function(params) {
+                    return params.seriesName + ' :<br/>' + params.name + ' : ' + params.value + '';
+                },
+                axisPointer: {
+                    show: true,
+                    type: 'cross',
+                    lineStyle: {
+                        type: 'dashed',
+                        width: 1
+                    }
+                }
+            },
+            legend: {
+                data: obj.legendData,
+                type: 'scroll',
+                show: obj.showLegend,
+                x: 'center',
+                y: 'top'
+            },
+            grid: {
+                left: '5%',
+                right: '5%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    name: obj.xAxisName,
+                    nameLocation: 'middle',
+                    nameGap: '60',
+                    type: 'category',
+                    scale: true,
+                    boundaryGap: true,
+                    data: obj.xAxisData,
+                    splitLine: {
+                        lineStyle: {
+                            type: 'dashed'
+                        }
+                    },
+                    axisLabel: {
+                        show: true,
+                        rotate: 45,
+                        formatter: function(param) {
+                            if (param.length > 7) {
+                                param = param.substr(0, 7) + '..';
+                            }
+                            return param;
+                        }
+                    },
+                    nameTextStyle: {
+                        padding: [0, 0, 0, 0]
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    name: obj.yAxisName,
+                    nameLocation: 'end',
+                    nameGap: '15',
+                    type: 'value',
+                    scale: true,
+                    axisLabel: {
+                        formatter: '{value}'
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            type: 'dashed'
+                        }
+                    },
+                    nameTextStyle: {
+                        padding: [0, 0, 0, 40]
+                    }
+                }
+            ],
+            dataZoom: [
+                {
+                    show: false,
+                    type: 'inside', //inside 为拖动效果
+                    realtime: true,
+                    filterMode: 'filter',
+                    start: 0,
+                    end: 100,
+                    xAxisIndex: 0,
+                    yAxisIndex: 0
+                }
+            ],
+            series: obj.seriesData
+        };
+
+        return options;
+    }
+
+    // 扇形图
+    createShanXingTu(obj) {
+        const options = {
+            renderAsImage: true,
+            animation: true,
+            title: {
+                text: obj.title,
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b} : {c} ({d}%)'
+            },
+            legend: {
+                data: obj.legendData,
+                type: 'scroll',
+                show: obj.showLegend,
+                x: 'center',
+                y: 'top'
+            },
+            series: [
+                {
+                    name: '数值',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '60%'],
+                    data: obj.seriesData,
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        return options;
+    }
+
+    // 条形图
+    createTiaoXingTu(obj) {
+        const options = {
+            renderAsImage: true,
+            animation: true,
+            title: {
+                text: obj.title,
+            },
+            tooltip: {},
+            legend: {
+                data: obj.legendData,
+                type: 'scroll',
+                show: obj.showLegend,
+                x: 'center',
+                y: 'top'
+            },
+            grid: {
+                left: '5%',
+                right: '5%',
+                containLabel: true
+            },
+            xAxis: {
+                name: obj.xAxisName,
+                nameLocation: 'middle',
+                nameGap: '25',
+                type: 'value',
+                nameTextStyle: {
+                    padding: [0, 0, 0, 0]
+                }
+            },
+            yAxis: {
+                name: obj.yAxisName,
+                nameLocation: 'end',
+                nameGap: '15',
+                type: 'category',
+                boundaryGap: true,
+                data: obj.yAxisData,
+                axisLabel: {
+                    show: true,
+                    rotate: 45,
+                    formatter: function(param) {
+                        if (param.length > 7) {
+                            param = param.substr(0, 7) + '..';
+                        }
+                        return param;
+                    }
+                },
+                nameTextStyle: {
+                    padding: [0, 0, 0, 40]
+                }
+            },
+            dataZoom: [
+                {
+                    show: false,
+                    type: 'inside', //inside 为拖动效果
+                    //type: 'slider',//slider为手动更新效果
+                    realtime: true,
+                    filterMode: 'filter',
+                    start: 0,
+                    end: 100,
+                    yAxisIndex: 0
+                }
+            ],
+            series: obj.seriesData
+        };
+
+        return options;
+    }
+
+    // 圆环图
+    createYuanHuanTu(obj) {
+        const options = {
+            renderAsImage: true,
+            animation: true,
+            title: {
+                text: obj.title
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b}: {c} ({d}%)'
+            },
+            legend: {
+                data: obj.legendData,
+                type: 'scroll',
+                show: obj.showLegend,
+                x: 'center',
+                y: 'top'
+            },
+            series: [
+                {
+                    name: '数值',
+                    type: 'pie',
+                    radius: ['30%', '70%'],
+                    data: obj.seriesData
+                }
+            ]
+        };
+
+        return options;
+    }
+
+    // 直方图
+    createZhiFangTu(obj) {
+        const options = {
+            renderAsImage: true,
+            animation: true,
+            title: {
+                text: obj.title
+            },
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            legend: {
+                data: obj.legendData,
+                type: 'scroll',
+                show: obj.showLegend,
+                x: 'center',
+                y: 'top'
+            },
+            grid: {
+                left: '5%',
+                right: '5%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    name: obj.xAxisName,
+                    nameLocation: 'middle',
+                    nameGap: '60',
+                    type: 'category',
+                    data: obj.xAxisData,
+                    boundaryGap: true,
+                    axisLabel: {
+                        show: true,
+                        rotate: 45,
+                        formatter: function(param) {
+                            if (param.length > 7) {
+                                param = param.substr(0, 7) + '..';
+                            }
+                            return param;
+                        }
+                    },
+                    nameTextStyle: {
+                        padding: [0, 0, 0, 0]
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    name: obj.yAxisName,
+                    nameLocation: 'end',
+                    nameGap: '15',
+                    type: 'value',
+                    nameTextStyle: {
+                        padding: [0, 0, 0, 40]
+                    }
+                }
+            ],
+            dataZoom: [
+                {
+                    show: false,
+                    type: 'inside', //inside 为拖动效果
+                    //type: 'slider',//slider为手动更新效果
+                    realtime: true,
+                    filterMode: 'filter',
+                    start: 0,
+                    end: 100,
+                    xAxisIndex: 0
+                }
+            ],
+            series: [
+                {
+                    name: obj.seriesName,
+                    type: 'bar',
+                    barWidth: '50%',
+                    data: obj.seriesData
+                }
+            ]
+        };
+
+        return options;
+    }
+
+    // 柱状图
+    createZhuZhuangTu(obj) {
+        const options = {
+            renderAsImage: true,
+            animation: true,
+            title: {
+                text: obj.title,
+                x: 'left'
+            },
+            tooltip: {},
+            legend: {
+                data: obj.legendData,
+                type: 'scroll',
+                show: obj.showLegend,
+                x: 'center',
+                y: 'top'
+            },
+            grid: {
+                left: '5%',
+                right: '5%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    name: obj.xAxisName,
+                    nameLocation: 'middle',
+                    nameGap: '60',
+                    type: 'category',
+                    boundaryGap: true,
+                    data: obj.xAxisData,
+                    axisLabel: {
+                        show: true,
+                        rotate: 45,
+                        formatter: function(param) {
+                            if (param.length > 7) {
+                                param = param.substr(0, 7) + '..';
+                            }
+                            return param;
+                        }
+                    },
+                    nameTextStyle: {
+                        padding: [0, 0, 0, 0]
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    name: obj.yAxisName,
+                    nameLocation: 'end',
+                    nameGap: '15',
+                    type: 'value',
+                    nameTextStyle: {
+                        padding: [0, 0, 0, 40]
+                    }
+                }
+            ],
+            dataZoom: [
+                {
+                    show: false,
+                    type: 'inside', //inside 为拖动效果
+                    realtime: true,
+                    filterMode: 'filter',
+                    start: 0,
+                    end: 100,
+                    xAxisIndex: 0
+                }
+            ],
+            series: obj.seriesData
+        };
+
+        return options;
+    }
+
+}
+
+module.exports = new All();
