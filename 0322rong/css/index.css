@@ -1,0 +1,271 @@
+.conversationList {
+    height: 470px;
+    position: absolute;
+    display: inline-block;
+    width: 194px;
+    left: 3px;
+    bottom: 3px;
+    overflow: hidden;
+    z-index: 999;
+    box-shadow: 1px 1px #f9fafb;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 5px 2px;
+    border-radius: 5px;
+}
+.conversationListHead {
+    height: 35px;
+    line-height: 35px;
+    background: url(images/webBg.png) 0 0/10px auto repeat;
+}
+.people-icon {
+    float: left;
+    margin-top: 8px;
+    margin-left: 36px;
+    margin-right: 8px;
+    vertical-align: middle;
+    width: 20px;
+    border: none;
+    height: 20px;
+    background-size: 45px auto;
+    background: url(images/icon.png) 0 0/50px auto no-repeat;
+    display: inline-block;
+}
+.people-rencent{
+    float: left;
+    color: #fff;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    cursor: default;
+}
+.people-arrow {
+    float: left;
+    vertical-align: middle;
+    width: 24px;
+    border: none;
+    height: 24px;
+    margin-left: 10px;
+    margin-right: -5px;
+    background: url(images/icon.png) 0 0/50px auto no-repeat;
+    background-position: 0 -57px;
+}
+.conversationListContent {
+    position: absolute;
+    top: 36px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.error-content {
+    display: none;
+    height: 40px;
+    padding-left: 18px;
+    background-color: #ffafaf;
+    line-height: 40px;
+}
+.error-icon {
+    background: url(images/icon.png) 0 0/50px auto no-repeat;
+    display: inline-block;
+    width: 20px;
+    height: 22px;
+    vertical-align: middle;
+    background-position: 0 -139px;
+}    
+.error-text {
+    font-size: 14px;
+    color: #fff;
+    vertical-align: middle;
+    padding-left: 2px;
+}
+.list-item {
+    padding: 10px 0 10px 12px;
+    cursor: pointer;
+    position: relative;
+    height: 56px;
+    border-bottom: 1px solid #e1e9f1;
+}
+.rongcloud-exti {
+    float: right;
+    color: #6b6f7c;
+    font-size: 13px;
+    text-align: right;
+    min-width: 55px;
+    font-size: 12px;
+    margin-top: 20px;
+}
+.badge {
+    float: left;
+    background-color: #0099ff;
+    font-weight: normal;
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 10px;
+}
+.exit-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    float: right;
+    background: url(images/icon.png) 0 0/50px auto no-repeat;
+    background-position: 0 -177px;
+    display: inline-block;
+}
+.rongcloud-photo {
+    float: left;
+    margin-top: 13px;
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}
+.rongcloud-photo img {
+    width: 32px;
+    height: 32px;
+}
+.rongcloud-info {
+    width: 85px;
+    margin-top: 20px;
+}
+.conversation {
+    height: 470px;
+    width: 430px;
+    position: absolute;
+    left: 201px;
+    right: 0px;
+    bottom: 3px;
+    border-radius: 5px 5px 5px 5px;
+    opacity: 1;
+    overflow: hidden;
+    z-index: 99999;
+    box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 5px 2px;
+}
+.conversation-head {
+    height: 35px;
+    line-height: 35px;
+    background: url(images/webBg.png) 0 0/10px auto repeat;
+}
+.current-user {
+    float: left;
+    margin-left: 20px;
+    color: #fff;
+    font-weight: bolder;
+    float: left;
+}
+.close-icon {
+    line-height: 36px;
+    width: 20px;
+    background: url(images/icon.png) 0 0/50px auto no-repeat;
+    display: inline-block;
+    height: 20px;
+    float: right;
+    background-position: 0 -291px;
+    margin-top: 8px;
+    margin-right: 8px;
+}
+.message-content {
+    width: 95%;
+    overflow: auto;
+    padding: 8px 16px;
+    position: absolute;
+    top: 36px;
+    bottom: 114px;
+    background-color: white;
+}
+.message-content span {
+    font-size: 14px;
+    color: #8e969f;
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+    margin-top: -10px;
+    position: absolute;
+    top: 10%;
+    width: 100px;
+    margin-left: -50px;
+    left: 50%;
+    cursor: pointer;
+}
+.message-inner {
+    margin-top: 40px;
+}
+.footer {
+    background: #fff;
+    height: 114px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border-radius: 0px 0px 5px 5px;
+    border-top: 1px solid #cdd7db;
+}
+.foot-layout {
+    margin-left:10px;
+}
+.send-content {
+    width: 90%;
+    height: 103px;
+    font-size: 16px;
+    color: #000;
+    border: none;
+}
+.send-content:focus {
+    border: none;
+    outline: none;
+}
+.submit {
+    position: absolute;
+    right: 10px;
+    bottom: 7px;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    border: none;
+    width: 60px;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 40px;
+    font-size: 9pt;
+    color: rgb(255, 255, 255);
+    background: #0099ff;
+    outline: 0;
+}
+.user_avatar img{
+    width: 32px;
+    height: 32px;
+    float: left;
+}
+.user_name {
+    margin-left: 10px;
+    font-size: 20px;
+    color: #8e969f;
+    float: left;
+}
+.message-list {
+    min-height: 65px;
+}
+
+.message {
+    clear: both;
+    margin-left: 44px;
+}
+.my_avatar img{
+    float: right;
+    border-radius: 50%;
+}
+.my_name {
+    margin-right: 7px;
+    float: right;
+}
+.my_message {
+    float: right;
+    margin-right: 44px;
+}

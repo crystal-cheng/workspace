@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/RongIMWidget.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+  </head>
+  <body>
+      <div id="Acontainer">
+            <h2>当前用户：<span>{{userId}}</span></h2><br/>
+            <label>用户Id：</label><input class="input" v-model="targetId">
+            <!-- <input v-model="sendContent">
+            <button class="btn" @click="setconversation()">发送消息</button><br/> <br/>
+            <span>收到来自用户：{{senderUserId}}     的信息：         {{message}}</span> -->
+            <div class="rong-container">
+                <div class="conversationList">
+                        <div class="conversationListHead">
+                            <div class="people-icon"></div>
+                            <div class="people-rencent">最近联系人</div>
+                            <div class="people-arrow"></div>
+                        </div>
+                        <div class="conversationListContent">
+                            <div class="error-content">
+                                <div class="error-icon"></div>
+                                <span class="error-text">连接断开,请刷新重连</span>
+                            </div>
+                            <div class="list-content">
+                                <div class="list-item">
+                                    <div class="rongcloud-exti">
+                                        <span class="badge">99+</span>
+                                        <i class="exit-icon"></i>
+                                    </div>
+                                    <div class="rongcloud-photo">
+                                        <img src="http://7xo1cb.com1.z0.glb.clouddn.com/rongcloudkefu2.png"/>
+                                    </div>
+                                    <div class="rongcloud-info">cqy</div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="conversation">
+                    <div class="conversation-head">
+                        <div class="current-user">用户：<span>{{targetId}}</span></div>
+                        <i class="close-icon"></i>
+                    </div>
+                    <div class="message-content">
+                        <span>查看更多消息</span>
+                        <div class="message-inner">
+                            <div class="message-list" v-for="message in messageList">
+                                <div class="user_avatar">
+                                    <img src="http://7xo1cb.com1.z0.glb.clouddn.com/rongcloudkefu2.png"/>
+                                </div>
+                                <div class="user_name">{{targetId}}</div>
+                                <div class="message">{{message}}</div>
+                            </div>
+                            <div class="my-message message-list" v-for="mymessage in mymessageList">
+                                <div class="user_avatar my_avatar">
+                                    <img src="http://cdn.duitang.com/uploads/item/201411/08/20141108201327_sCxZX.jpeg"/>
+                                </div>
+                                <div class="user_name my_name">{{userId}}</div>
+                                <div class="message my_message">{{mymessage}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <div class="foot-layout">
+                            <textarea class="send-content" v-model="sendContent"></textarea>
+                            <button class="submit" @click="setconversation()">发送</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdn.ronghub.com/RongIMLib-2.2.8.min.js"></script>
+    <script>
+              var app = new Vue({
+                el: '#Acontainer',
+                data: {
+                    userId: '',
+                    targetId: 'cqy',
+                    sendContent: '',
+                    message: '',
+                    senderUserId: '',
+                    messageList: [],
+                    mymessageList: []
+                },
+                methods: {
+                    setconversation: function (){
+                        var _this = this;
+                        var msg = new RongIMLib.TextMessage({content:_this.sendContent,extra:"附加信息"});
+    
+                        //或者使用RongIMLib.TextMessage.obtain 方法.具体使用请参见文档
+                        //var msg = RongIMLib.TextMessage.obtain("hello");
+    
+                        var conversationType = RongIMLib.ConversationType.PRIVATE; // 私聊
+                        // var targetId = 'cqy'; // 目标 Id
+                        
+                        var instance = RongIMClient.getInstance();
+                        _this.mymessageList.push(_this.sendContent);
+                        instance.sendMessage(conversationType, _this.targetId, msg, {
+                                //发送消息成功
+                            onSuccess: function (message) {
+                                //message 为发送的消息对象并且包含服务器返回的消息唯一Id和发送消息时间戳
+                                console.log("Send successfully");
+                            },
+                            onError: function (errorCode,message) {
+                                var info = '';
+                                switch (errorCode) {
+                                    case RongIMLib.ErrorCode.TIMEOUT:
+                                        info = '超时';
+                                        break;
+                                    case RongIMLib.ErrorCode.UNKNOWN_ERROR:
+                                        info = '未知错误';
+                                        break;
+                                    case RongIMLib.ErrorCode.REJECTED_BY_BLACKLIST:
+                                        info = '在黑名单中，无法向对方发送消息';
+                                        break;
+                                    case RongIMLib.ErrorCode.NOT_IN_DISCUSSION:
+                                        info = '不在讨论组中';
+                                        break;
+                                    case RongIMLib.ErrorCode.NOT_IN_GROUP:
+                                        info = '不在群组中';
+                                        break;
+                                    case RongIMLib.ErrorCode.NOT_IN_CHATROOM:
+                                        info = '不在聊天室中';
+                                        break;
+                                    default :
+                                        info = x;
+                                        break;
+                                }
+                                console.log('发送失败:' + info);
+                            }
+                            }
+                        );
+                        _this.sendContent = '';
+                    }
+                },
+                created: function () {
+                    var _this = this;
+                    RongIMLib.RongIMClient.init("vnroth0kv4uro");
+                    RongIMLib.RongIMClient.setConnectionStatusListener({
+                        onChanged: function (status) {
+                            switch (status) {
+                                case RongIMLib.ConnectionStatus.CONNECTED:
+                                    console.log('链接成功aaaa..................');
+                                    break;
+                                case RongIMLib.ConnectionStatus.CONNECTING:
+                                    console.log('正在链接');
+                                    break;
+                                case RongIMLib.ConnectionStatus.DISCONNECTED:
+                                    console.log('断开连接');
+                                    break;
+                                case RongIMLib.ConnectionStatus.KICKED_OFFLINE_BY_OTHER_CLIENT:
+                                    console.log('其他设备登录');
+                                    break;
+                                    case RongIMLib.ConnectionStatus.DOMAIN_INCORRECT:
+                                    console.log('域名不正确');
+                                    break;
+                                case RongIMLib.ConnectionStatus.NETWORK_UNAVAILABLE:
+                                    console.log('网络不可用');
+                                    break;
+                            }
+                        }
+                    });
+                    RongIMLib.RongIMClient.setOnReceiveMessageListener({
+                        // 接收到的消息
+                        onReceived: function (message) {
+                            _this.message = message.content.content;
+                            _this.senderUserId = message.senderUserId; 
+                            _this.messageList.push(_this.message);
+                            // 判断消息类型
+                            switch(message.messageType){
+                                case RongIMClient.MessageType.TextMessage:
+                                    // message.content.content => 消息内容
+                                    break;
+                                case RongIMClient.MessageType.VoiceMessage:
+                                    // 对声音进行预加载                
+                                    // message.content.content 格式为 AMR 格式的 base64 码
+                                    break;
+                                case RongIMClient.MessageType.ImageMessage:
+                                    // message.content.content => 图片缩略图 base64。
+                                    // message.content.imageUri => 原图 URL。
+                                    break;
+                                case RongIMClient.MessageType.DiscussionNotificationMessage:
+                                    // message.content.extension => 讨论组中的人员。
+                                    break;
+                                case RongIMClient.MessageType.LocationMessage:
+                                    // message.content.latiude => 纬度。
+                                    // message.content.longitude => 经度。
+                                    // message.content.content => 位置图片 base64。
+                                    break;
+                                case RongIMClient.MessageType.RichContentMessage:
+                                    // message.content.content => 文本消息内容。
+                                    // message.content.imageUri => 图片 base64。
+                                    // message.content.url => 原图 URL。
+                                    break;
+                                case RongIMClient.MessageType.InformationNotificationMessage:
+                                    // do something...
+                                    break;
+                                case RongIMClient.MessageType.ContactNotificationMessage:
+                                    // do something...
+                                    break;
+                                case RongIMClient.MessageType.ProfileNotificationMessage:
+                                    // do something...
+                                    break;
+                                case RongIMClient.MessageType.CommandNotificationMessage:
+                                    // do something...
+                                    break;
+                                case RongIMClient.MessageType.CommandMessage:
+                                    // do something...
+                                    break;
+                                case RongIMClient.MessageType.UnknownMessage:
+                                    // do something...
+                                    break;
+                                default:
+                                    // do something...
+                            }
+                        }
+                    });
+                    var tokenA = "5q3q2ODRjErbBWK25KdOTjq+Tp8rVVKeaRDivlyww6Cl2R4/vsSXGVCUtSZ6Tl42mglNG7IsJ/g1UAUopT/D0uDuC81KEhDu+DiSv2uwAjs=";
+                    connect(tokenA);
+                    function connect(token) {
+                        RongIMLib.RongIMClient.connect(token, {
+                            onSuccess: function(userId) {
+                                _this.userId = userId;
+                                console.log('连接成功：' + _this.userId);
+                            },
+                            onTokenIncorrect: function() {
+                                console.log('token无效');
+                            },
+                            onError:function(errorCode){
+                                var info = '';
+                                switch (errorCode) {
+                                    case RongIMLib.ErrorCode.TIMEOUT:
+                                    info = '超时';
+                                    break;
+                                    case RongIMLib.ErrorCode.UNKNOWN_ERROR:
+                                    info = '未知错误';
+                                    break;
+                                    case RongIMLib.ErrorCode.UNACCEPTABLE_PaROTOCOL_VERSION:
+                                    info = '不可接受的协议版本';
+                                    break;
+                                    case RongIMLib.ErrorCode.IDENTIFIER_REJECTED:
+                                    info = 'appkey不正确';
+                                    break;
+                                    case RongIMLib.ErrorCode.SERVER_UNAVAILABLE:
+                                    info = '服务器不可用';
+                                    break;
+                                }
+                                console.log(errorCode);
+                            }
+                        });
+    
+                        var callback = {
+                            onSuccess: function(userId) {
+                                console.log("Reconnect successfully." + userId);
+                            },
+                            onTokenIncorrect: function() {
+                                console.log('token无效');
+                            },
+                            onError:function(errorCode){
+                                console.log(errorcode);
+                            }
+                        };
+    
+                        var config = {
+                            // 默认 false, true 启用自动重连，启用则为必选参数
+                            auto: true,
+                            // 重试频率 [100, 1000, 3000, 6000, 10000, 18000] 单位为毫秒，可选
+                            url: 'https://cdn.ronghub.com/RongIMLib-2.2.8.min.js',
+                            // 网络嗅探地址 [http(s)://]cdn.ronghub.com/RongIMLib-2.2.6.min.js 可选
+                            rate: [100, 1000, 3000, 6000, 10000]
+                        };
+                        RongIMLib.RongIMClient.reconnect(callback, config);
+                    }
+                }
+            });
+    </script>
+  </body>
+
+
+</html>
+
