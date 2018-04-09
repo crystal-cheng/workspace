@@ -1,0 +1,11 @@
+{
+  "name": "cqy0326",
+  "version": "1.0.0",
+  "description": "cqy test npm",
+  "main": "init.npm-init.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
