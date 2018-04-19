@@ -1,0 +1,172 @@
+/*
+    Document   : calendarset
+    Created on : 2012-12-20, 17:44:44
+    Author     : zxc
+    Description:
+    Purpose of the stylesheet follows.
+*/
+
+root {
+    display: block;
+}
+#Navigation > li {
+    display: block;
+}
+
+#Navigation > div {
+    border: 1px solid #9E9E9F !important;
+}
+.content {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    min-height:440px;
+}
+.setting-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+.tab {
+    border-bottom: 1px solid #CCCCCC;
+    margin-bottom: 20px;
+}
+ol, ul {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+.tab li {
+    float: left;
+    margin-left: 5px;
+}
+#label-name {
+    float: left;
+    margin-right: 10px;
+    width: 248px;
+}
+
+.label-list {
+    margin: 10px 0;
+    width: 800px;
+}
+ol, ul {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+.label-list li {
+    line-height: 18px;
+    padding: 10px;
+}
+.label-list .color, #lb-edit-color {
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 5px;
+    padding: 5px 5px 1px;
+}
+element.style {
+    background-color: #72ABD7;
+}
+.label-list .color em, #lb-edit-color em {
+    border-radius: 3px 3px 3px 3px;
+    display: inline-block;
+    height: 14px;
+    text-indent: -99999px;
+    width: 14px;
+}
+.label-name {
+    display: inline-block;
+    padding-top: 3px;
+    vertical-align: top;
+    width: 480px;
+}
+.label-list .operate {
+    display: inline-block;
+    text-align: right;
+    width: 250px;
+}
+.label-list .operate .edit {
+    background-position: 0 2px;
+    margin-right: 40px;
+}
+.label-list .operate .delete {
+    background-position: 0 -50px;
+}
+.label-list .name {
+    font-size: 16px;
+    max-width: 300px;
+}
+.lightbox-title {
+    font-size: 16px;
+    margin-bottom: 15px;
+    margin-top: 5px;
+}
+element.style {
+    display: block;
+    left: 134px;
+    top: 307px;
+}
+#color-panel {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 0 3px 3px 3px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    padding: 10px 5px 5px 10px;
+    position: absolute;
+    width: 110px;
+    z-index: 10000;
+}
+ol, ul {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+#color-panel li {
+    border: 1px solid #FFFFFF;
+    cursor: pointer;
+    float: left;
+    height: 20px;
+    margin: 0 5px 5px 0;
+    text-indent: -99999px;
+    width: 20px;
+}
+.label-list .color.active, #lb-edit-color.active {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #FFFFFF;
+    border-color: #CCCCCC #CCCCCC -moz-use-text-color;
+    border-radius: 3px 3px 0 0;
+    border-style: solid solid none;
+    border-width: 1px 1px medium;
+    padding: 4px 4px 1px;
+    position: relative;
+    z-index: 10001;
+}
+.label-list .color, #lb-edit-color {
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 5px;
+    padding: 5px 5px 1px;
+}
+.select {
+    height: 20px !important;
+    background-position: 50% -35px;
+    background-repeat: no-repeat;
+    border: 1px solid #707070 !important;
+}

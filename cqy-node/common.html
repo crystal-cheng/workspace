@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>common</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    
+</head>
+<body>
+    <div id="test" style="width:100px;height:100px; overflow-y:scroll">['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+        ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+        ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],</div>
+    <script>
+    window.onload = function(){
+            /**
+             * 通过时间字符串解析出是星期几
+             *
+             * @method weekDay
+             * @param {String}  dateStr
+             * @return {String} 星期
+             */
+            function weekDay(dateStr) {
+                var weekDay = ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+                myDate = new Date(Date.parse(dateStr.replace(/-/g, '/')));
+                return weekDay[myDate.getDay()];
+            }
+
+            /**
+             * 将时间字符串转化为时间对象
+             *
+             * @method creatDateObj
+             * @param {String}  strDate
+             * @return {Object} 时间对象
+             */
+            function creatDateObj(strDate) {
+                var arrDate = strDate.replace(/-/g, ',').replace(/:/g, ',').replace(/\s/g, ',')
+                    .replace(/\//g, ',').replace(/年/g, ',').replace(/月/g, ',')
+                    .replace(/日/g, ',').replace(/点/g, ',').replace(/分/g, ',').replace(/秒/g, ',').split(','), objDate;
+                arrDate[1] = parseInt(arrDate[1], 10) - 1;
+                objDate = new Date(arrDate[0], arrDate[1] || 0, arrDate[2] || 1,
+                    arrDate[3] || 0, arrDate[4] || 0, arrDate[5] || 0);
+                return objDate;
+            }
+
+
+            var dateStr = '2018-02-05';
+            // console.log(dateStr + ' 是 ' + weekDay(dateStr));
+            // console.log(creatDateObj('2018-02-05 15:30:30'));
+
+            /**
+             * 判断滚轮滚动方向
+             *
+             * @method scrollEvent
+             * @param {Object}    事件对象
+             * @return {Number}   滚轮方向 1：向上 -1：向下
+             */
+             function scrollEvent(e) {
+                var direct = 0;
+                e = e || window.event;
+                if (e.wheelDelta) {//IE/Opera/Chrome
+                    direct = e.wheelDelta;
+                    e.returnValue = false;
+                } else if (e.detail) {//Firefox
+                    direct = e.detail;
+                    e.preventDefault();
+                    if (direct < 0) {
+                        direct = 1;
+                    } else {
+                        direct = -1;
+                    }
+                }
+                return direct;
+            }
+
+            console.log(scrollEvent(('#test').scroll),'direct');
+    }
+
+    </script>
+</body>
+</html>

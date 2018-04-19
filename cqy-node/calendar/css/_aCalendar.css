@@ -1,0 +1,609 @@
+.demo
+{
+    height: 360px;
+
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+.c-calendar
+{
+    overflow: visible !important;
+}
+
+.c-hear *,
+.c-body *
+{
+    color: #444;
+}
+
+/* 日历头部样式 ----------------------------------------------------------<head>*/
+.c-head
+{
+    width: 100%;
+    height: 45px;
+    padding: 10px;
+
+    color: #444;
+}
+
+.c-group
+{
+    font-size: 12px;
+    line-height: 23px;
+    /*line-height: 24px;*/
+
+    position: relative;
+
+    float: left;
+
+    height: 25px;
+
+    cursor: pointer;
+    text-align: center;
+
+    border: 1px solid #ccc;
+}
+.c-group-left
+{
+    line-height: 23px;
+
+    position: relative;
+    z-index: 1;
+
+    float: left;
+
+    width: 20px;
+    margin-right: -20px;
+
+    text-align: center;
+}
+.c-group-right
+{
+    line-height: 23px;
+
+    float: right;
+
+    width: 20px;
+    margin-left: -20px;
+
+    text-align: center;
+}
+.c-group .fa
+{
+    color: #ccc;
+}
+.c-group-mid
+{
+    float: left;
+
+    width: 100%;
+    height: 25px;
+
+    cursor: pointer;
+    text-align: center;
+}
+
+.c-group-mid-content
+{
+    position: relative;
+    margin-right: 20px;
+    margin-left: 20px;
+
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+}
+.c-festival .c-group-mid-content
+{
+    float: left;
+    /*width: 75px;*/
+    margin-right: 10px;
+    margin-left: 0;
+    width: 100%;
+    border: none;
+}
+.c-festival{
+    width: 55%;
+    margin-right: 10px
+}
+
+.c-festival .c-group
+{
+    float: none;
+    overflow: hidden;
+}
+.c-year
+{
+    width: 57%;
+}
+
+.c-month
+{
+    width: 43%;
+}
+
+.c-year .c-group,
+.c-month .c-group
+{
+    float: none;
+    margin-right: 10px;
+}
+
+.c-year .c-group
+{
+    margin-left: 15px
+}
+
+.c-dis-festival
+{
+    margin-right: 12px;
+}
+
+.c-today
+{
+    width: 40%;
+    text-align: center;
+}
+
+.c-workday
+{
+    margin-left: 10px;
+    width: 110px;
+    height: 25px;
+    display: none;
+    text-align: center;
+}
+
+.c-dropDown
+{
+    position: absolute;
+    top: 5px;
+    right: 10%;
+}
+.c-festival .c-dropDown
+{
+    right: 5%;
+}
+
+.c-operate-table
+{
+    width: 100%;
+}
+.c-group-space
+{
+    float: right;
+
+    width: 10px;
+    height: 1px;
+    margin-left: -10px;
+}
+
+
+/* ------------------------------------------------------------------- </head>*/
+.c-table
+{
+    font-size: 14px;
+
+    width: 100%;
+    height: 100%;
+}
+.c-table > thead > tr > th
+{
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 13px;
+
+    height: 13px;
+    padding: 0 0 10px;
+
+    text-align: center;
+
+    border-bottom: 1px solid #dedede;
+}
+.c-table > tbody > tr > td
+{
+    position: relative;
+
+    text-align: center;
+}
+.c-body
+{
+    height: 314px;
+}
+.c-item-disDate
+{
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #000;
+}
+.c-item-lunar
+{
+    font-size: 12px;
+    line-height: 16px;
+
+    color: #a7a7a7;
+}
+
+.c-item-pos
+{
+    font-size:11px;
+}
+.c-item-work{
+    color:orange;
+}
+.c-item-rest{
+    color: #78bb9c;
+}
+.c-item-date
+{
+    position: relative;
+    bottom: -4px;
+
+    width: 38px;
+    height: 38px;
+    margin: 0 auto;
+
+    border-radius: 50%;
+}
+.c-item-date:hover
+{
+    cursor: pointer;
+
+    background-color: #78bb9c;
+}
+.c-item-date:hover *
+{
+    color: #fff;
+}
+
+.c-item-today
+{
+    background-color: #78bb9c;
+}
+.c-item-today *
+{
+    color: #fff;
+}
+
+.c-item-flag
+{
+    font-size: 8px;
+
+    position: absolute;
+    top: -8px;
+    left: 50%;
+
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+
+    background-image: url("/components/calendar/images/schedule.png");
+}
+.c-flag-today
+{
+    background-image: url("/components/calendar/images/schedule-today.png");
+}
+.c-item-other
+{
+    color: #bfbfbf;
+}
+.c-schedule
+{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: -170px;
+    left: 100%;
+
+    display: none;
+
+    min-width: 300px;
+    min-height: 200px;
+
+    color: #444;
+    border: 1px solid #a7a7a7;
+    background: none repeat scroll 0 0 #fff;
+}
+.c-schedule-line
+{
+    line-height: 20px;
+
+    min-height: 26px;
+    margin: 10px;
+}
+.c-schedule-item-title
+{
+    float: left;
+
+    width: 20%;
+}
+.c-schedule-item-value
+{
+    position: relative;
+
+    float: right;
+
+    width: 80%;
+
+    text-align: left;
+    word-wrap: break-word;
+}
+.c-time-small
+{
+    font-size: 12px;
+}
+.c-left-trangle
+{
+    font-size: 0;
+    line-height: 0;
+
+    position: absolute;
+
+    display: inline-block;
+    overflow: hidden;
+
+    width: 0;
+    height: 0;
+
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 0 solid transparent;
+}
+.c-left-down
+{
+    top: 10%;
+    left: -18px;
+
+    border-right: 17px solid #a7a7a7;
+}
+.c-left-up
+{
+    top: 10%;
+    left: -16px;
+
+    border-right: 17px solid #fff;
+}
+
+ul.c-list
+{
+    position: absolute;
+    z-index: 1;
+    top: 25px;
+
+    display: none;
+    overflow-y: auto;
+
+    width: 100%;
+    height: 250px;
+
+    border: 1px solid #ccc;
+    background: none repeat scroll 0 0 #fff;
+}
+
+ul.c-list li:hover
+{
+    color: #fff;
+    background-color: #78bb9c;
+}
+
+.c-item-today-unselect
+{
+    background-color: #a7a7a7;
+}
+
+.c-item-select
+{
+    background-color: #78bb9c;
+}
+.c-item-select *
+{
+    color: #fff !important;
+}
+.c-flag-select
+{
+    background-image: url("/components/calendar/images/schedule-today.png");
+}
+.c-festival-list-item
+{
+    line-height: 23px;
+}
+
+/* ----------------------弹框选择---------------------------- */
+#s-body
+{
+    width: 202px;
+    height: 162px;
+    border: 1px solid #cdcdcd;
+    display:none;
+    position:absolute;
+    -webkit-box-shadow:0 0 4px #cdcdcd;
+    -moz-box-shadow:0 0 4px #cdcdcd;
+    box-shadow:0 0 4px #cdcdcd;
+}
+.s-head
+{
+    width: 200px;
+    height: 34px;
+    line-height: 34px;
+    background-color: #cdcdcd;
+}
+.s-select
+{
+    float: left ;
+    margin-left: 10px;
+}
+.destroy
+{
+    float: right;
+    width: 20px;
+    height: 20px;
+    margin-top: 7px;
+    margin-right: 10px;
+    background: url("/components/calendar/images/destroy.png") no-repeat;
+    cursor:pointer;
+}
+.s-middle
+{
+    width: 200px;
+    height: 90px;
+    line-height: 90px;
+    background-color: #FFFFFF;
+}
+.s-middle input
+{
+    margin-left: 17px;
+}
+.s-state
+{
+    margin-left: 18px;
+}
+.s-bottom
+{
+    width: 200px;
+    height: 36px;
+    background-color: #FFFFFF;
+}
+.s-bottom button
+{
+    margin-left: 20px;
+}
+
+.c-workday-list
+{
+    margin-top:8px;
+    width: 242px;
+    font-size: 12px;
+    font-family: "微软雅黑";
+    color: #444444;
+}
+
+.c-workday .dropdown-menu
+{
+    float: right;
+    left: auto;
+    right: 0px;
+}
+
+.c-workday-list input
+{
+    font-size: 12px;
+    font-family: "微软雅黑";
+    color: black;
+}
+
+.job{
+    text-align: left;
+    margin-left: 10px;
+}
+
+.jobTime{
+    margin-left:10px;
+    width: 228px;
+    height: 20px;
+    margin-bottom: 10px;   
+}
+.jobTime .select2-container .select2-choice {
+  height: 25px;
+  line-height: 1.42857;
+}
+.jobTime .select2-chosen,
+.select2-choice > span:first-child,
+.select2-container .select2-choices .select2-search-field input {
+  padding: 4px 5px;
+}
+.jobTime .select2-container .select2-choice .select2-arrow b,
+.select2-container .select2-choice div b {
+  background-position: 0 0px;
+}
+
+.moringTime, .afternoonTime
+{
+    margin-bottom: 10px;
+}
+
+.moring, .moringTime,
+.afternoon, .afternoonTime,
+.range, .timeRange
+{
+    text-align: left;
+    margin-left: 10px;
+}
+
+.moring span,
+.afternoon span,
+.range span
+{
+    font-size: 12px;
+    font-family: "微软雅黑";
+    color: #444444;
+}
+
+#moringStartTime,
+#afternoonStartTime,
+#rangeStartTime
+{
+    width: 100px;
+    height: 24px;
+    margin-right: 5px
+}
+
+#moringEndTime,
+#afternoonEndTime,
+#rangeEndTime
+{
+    width: 100px;
+    height: 24px;
+    margin-left: 5px
+}
+
+.t-bottom
+{
+    text-align: center;
+    margin: 15px auto 10px 0px;
+}
+
+.revoke, .save
+{
+    width: 60px;
+    height: 22px;
+    border-radius: 2px;
+    font-size: 12px;
+    color: #ffffff;
+    line-height: 22px;
+    border: 0px
+}
+
+.revoke
+{
+    background: #acacac;
+    margin-right:10px;
+}
+
+.save
+{
+    background: #6883a3;
+}
+
+.c-workday-list:before {
+    content: " ";
+    display: inline-block;
+    position: absolute;
+    top: -8px;
+    left: 200px;
+    border-left: 8px solid transparent;
+    border-top: 0 solid #ccc;
+    border-right: 7px solid transparent;
+    border-bottom: 8px solid #ccc;
+}
+
+.c-workday-list:after {
+    content: " ";
+    display: inline-block;
+    position: absolute;
+    top: -7px;
+    left: 201px;
+    border-left: 7px solid transparent;
+    border-top: 0 solid #fff;
+    border-right: 6px solid transparent;
+    border-bottom: 8px solid #fff;
+}

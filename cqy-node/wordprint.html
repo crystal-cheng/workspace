@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<script src="js/index.js"></script>
+	</head>
+	<body onselectstart="return false">
+		<div id="content" class="clear">
+			<textarea id="left">
+当我们经历任何一种形式的稀缺时，都会对稀缺的事物全神贯注。我们的思想会自动而强有力地转向未得到满足的需要：对于饥饿的人来说，他们需要食物；对于忙碌的人来说，他们需要亟待完成某项工作的时间；对于缺钱的人来说，他们需要想办法支付每个月的房租；而对于孤独的人来说，他们需要他人的陪伴。稀缺造成的后果不仅仅是因为我们会因拥有的太少而感到不悦，而是因为它会改变我们的思维方式，会强行侵入我们的思想之中。
+稀缺对人大脑的影响，存在于潜意识之中。无论大脑的主人是否愿意，稀缺都会牢牢的俘获他的注意力。
+			</textarea>
+			<div id="centerBox">
+				<div id="btn">
+					<strong>&rarr;</strong>
+					<span>把文字右移</span>
+				</div>
+				<div id="text">0/0</div>
+			</div>
+			<div id="right"></div>
+		</div>
+	</body>
+</html>
+<style>
+    html{
+    height: 100%;
+    overflow: hidden;
+}
+body{
+    margin: 0;
+    background: url(../img/bg.png) no-repeat;
+    background-size: cover;
+}
+.clear:after{
+    content: "";
+    display: block;
+    clear: both;
+}
+#content{
+    width: 850px;
+    padding: 28px;
+    background-color: rgba(115,103,195,0.8);
+    border-radius: 10px;
+    margin: 150px auto;
+    position: relative;
+}
+#left,#right{
+    width: 340px;
+    height: 390px;
+    box-sizing: border-box;
+    border: 1px solid #402196;
+    background-color: #eef8fa;
+    border-radius: 4px;
+    font: 14px/32px "微软雅黑";
+    color: #402196;
+    overflow: auto;
+    padding: 12px 23px;
+    resize: none;
+    word-break: break-all;
+}
+#left{
+    float: left;
+}
+#right{
+    float: right;
+}
+#centerBox{
+    width: 100px;
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 167px;
+    margin-left: -50px;
+}
+#btn{
+    background-color: #7ee4fd;
+    border-radius: 5px;
+    padding-bottom: 18px;
+}
+#btn strong{
+    font-size: 50px;
+    line-height: 47px;
+    display: block;
+}
+#text{
+    line-height: 54px;
+    color: #7ee4fd;
+}
+::-webkit-scrollbar {
+      width: 10px;
+      margin-right: 10px;
+} /* 这是针对缺省样式 (必须的) */
+::-webkit-scrollbar-track {
+      background-color: #cbcde6;
+      border-radius: 10px;
+} /* 滚动条的滑轨背景颜色 */
+::-webkit-scrollbar-thumb {
+      background-color: #9378dd; 
+      border-radius: 10px;
+} /* 滑块颜色 */
+::-webkit-scrollbar-button {
+      background-color: transparent;
+} /* 滑轨两头的监听按钮颜色 */
+::-webkit-scrollbar-corner {
+      background-color: black;
+} /* 横向滚动条和纵向滚动条相交处尖角的颜色 */
+</style>
+<script>
+    window.onload = function (){
+
+
+    //获取左半边区域
+    var contentLeft = document.querySelector('#left')
+    //获取按钮
+    var btn = document.querySelector('#btn')
+    //获取右边区域
+    var contentRight = document.querySelector('#right')
+    //获取文字计时text
+    var text = document.querySelector('#text')
+    //设置自动定时器,用以达到不断运动效果
+    var timer = null;
+   
+   //为按钮创建点击事件
+   btn.onclick = function(){
+   	//判断如果定时器在运行 或者左边文本框的 value值为空
+   	if(timer || contentLeft.value == ''){
+   		//返回
+   		return;
+   	}
+   	//调用函数
+   	change(contentLeft,contentRight);
+   }
+
+	//封装函数
+	function change(left,right){
+		//获取需要搬运的文本框中全部文字
+		var str1 = left.value
+		//重新输入内容重新搬运时将右边目标区域清空
+		right.innerHTML = '';
+		//设置计数器
+		var n = 0;
+		//存储需要搬运内容的长度
+		var len = str1.length;
+		//设置自动定时器
+		timer = setInterval(function(){
+			//搬运时计数器依次增加
+			n++;
+			//为text赋值动态计时，将依次增加的n+/+全部文字的长度计数
+			text.innerHTML = n + '/'+len;
+			//每次获取字符串中的一个字符加上前面的字符赋值给右边区域
+			right.innerHTML += str1.charAt(0);
+			//左边内容每次减少一个字符，重新赋值给字符串str
+			str1 = str1.slice(1);
+			//left 最终的值是最后的字符串内容
+			left.value = str1;
+			//判断如果搬运完毕了
+			if(str1.length == 0){
+				//清除定时器
+				clearInterval(timer)
+				//设置定时器为空
+				timer = null;
+				//返回值
+				return;
+			}
+		//30毫秒运动一次
+		},30)
+	}
+
+}
+    
+</script>

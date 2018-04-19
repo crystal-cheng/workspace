@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>vue菜单组件</title>
+</head>
+<body>
+	<div id="app">
+        <runoob></runoob>
+        <div>
+            <div class="menu-topwrap">
+                <ul>
+                    <li><span>一级目录一</span></li>
+                    <li><span>一级目录二</span></li>
+                    <li><span>一级目录三</span></li>
+                    <li><span>一级目录四</span></li>
+                    <li><span>一级目录五</span></li>
+                </ul>
+            </div>
+        </div>
+	</div>
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js" type="text/javascript" charset="utf-8"></script>
+    <script id="appsystem-list-tpl" type="text/x-template">
+        <div>
+            <div class="menu-topwrap">
+                <ul></ul>
+            </div>
+        </div>
+
+
+    </script>
+    <script type="text/javascript">
+    // 定义局部组件
+    var Child = {
+        template: '#appsystem-list-tpl'
+    } 
+        
+    // 创建根实例
+    new Vue({
+        el: '#app',
+        components: {
+        // <runoob> 将只在父模板可用
+        'runoob': Child
+        }
+    })
+	</script>
+</body>
+</html>

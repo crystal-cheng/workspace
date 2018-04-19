@@ -1,0 +1,20 @@
+
+.show-img[data-v-2b4349ae] {
+  height: 199px;
+  background: url(http://nodestatic.cqy.aysaas.com/imgs/error/404/error-title.png) no-repeat center center;
+}
+.error-404 a[data-v-2b4349ae] {
+  display: block;
+  width: 455px;
+  height: 63px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border-left: 10px solid white;
+  background: url(http://nodestatic.cqy.aysaas.com/imgs/error/404/error-return.png) no-repeat center center;
+  cursor: pointer;
+}
+.error-404[data-v-2b4349ae] {
+  position: absolute;
+  left: calc(50% - 450px / 2);
+  top: calc(50% - 262px / 2);
+}

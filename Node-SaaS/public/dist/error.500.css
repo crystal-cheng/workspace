@@ -1,0 +1,20 @@
+
+.show-img[data-v-b877c4b0] {
+  height: 272px;
+  background: url(http://nodestatic.cqy.aysaas.com/imgs/error/500/500.png) no-repeat center center;
+}
+.error-500 a[data-v-b877c4b0] {
+  display: block;
+  width: 288px;
+  height: 47px;
+  margin: 20px auto 0;
+  box-sizing: border-box;
+  border-left: 10px solid white;
+  background: url(http://nodestatic.cqy.aysaas.com/imgs/error/404/error-return.png) no-repeat center center;
+  cursor: pointer;
+}
+.error-500[data-v-b877c4b0] {
+  position: absolute;
+  left: calc(50% - 288px / 2);
+  top: calc(50% - 339px / 2);
+}

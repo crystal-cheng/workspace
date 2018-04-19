@@ -1,0 +1,11 @@
+.provinceCity {
+    min-width: 120px;
+    width: auto;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.error {
+    color: #ff6666;
+    display: block;
+}

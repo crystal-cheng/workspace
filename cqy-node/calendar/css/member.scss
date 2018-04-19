@@ -1,0 +1,658 @@
+#Pagination{  margin-bottom:20px;margin-top:20px;margin-right:8px;float:right}
+#Pagination A {
+    BORDER-BOTTOM: #aae 1px solid; BORDER-LEFT: #aae 1px solid; COLOR: #15b; BORDER-TOP: #aae 1px solid; BORDER-RIGHT: #aae 1px solid; TEXT-DECORATION: none
+}
+#Pagination A {
+    PADDING-BOTTOM: 0.1em; PADDING-LEFT: 0.4em; PADDING-RIGHT: 0.4em; DISPLAY: inline-block; MARGIN-BOTTOM: 5px; MARGIN-RIGHT: 5px; PADDING-TOP: 0.1em
+}
+#Pagination SPAN {
+    PADDING-BOTTOM: 0.1em; PADDING-LEFT: 0.4em; PADDING-RIGHT: 0.4em; DISPLAY: inline-block; MARGIN-BOTTOM: 5px; MARGIN-RIGHT: 5px; PADDING-TOP: 0.1em
+}
+#Pagination .current {
+    BORDER-BOTTOM: #aae 1px solid; BORDER-LEFT: #aae 1px solid; BACKGROUND: #26b; COLOR: #fff; BORDER-TOP: #aae 1px solid; BORDER-RIGHT: #aae 1px solid
+}
+#Pagination .prev.current {
+    BORDER-BOTTOM-COLOR: #999; BORDER-TOP-COLOR: #999; BACKGROUND: #fff; COLOR: #999; BORDER-RIGHT-COLOR: #999; BORDER-LEFT-COLOR: #999
+}
+#Pagination .next.current {
+    BORDER-BOTTOM-COLOR: #999; BORDER-TOP-COLOR: #999; BACKGROUND: #fff; COLOR: #999; BORDER-RIGHT-COLOR: #999; BORDER-LEFT-COLOR: #999
+}
+
+
+#my-worklog {
+    margin-left:0px;
+}
+
+.team-worklog {
+    padding: 20px 30px 0 30px;
+}
+
+.team-worklog.no-worklog {
+    padding: 0;
+    height: 400px;
+    background: url("/components/calendar/images/no-worklog-day.png") no-repeat 50% 50%;
+}
+
+.team-worklog.no-worklog.new-day {
+    background: url("/components/calendar/images/yin-dang-de-yi-tian.png") no-repeat 50% 50%;
+}
+
+.team-worklog .member-worklog {
+    margin: 0 0 40px 0;
+}
+
+.team-worklog .member-worklog .title {
+    border-top: 1px solid #cccccc;
+    padding: 16px 0 5px 70px;
+    line-height: 24px;
+    position: relative;
+}
+
+
+.team-worklog .member-worklog .title .avatar img {
+    display: block;
+    width: 50px;
+    height: 50px;
+}
+
+.team-worklog .member-worklog .title .name {
+    font-size: 20px;
+}
+
+.team-worklog .member-worklog .title .total-hour {
+    display: block;
+    line-height: 36px;
+    font-size: 36px;
+    color: #cccccc;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+}
+
+.worklogs {
+    padding: 5px 0 0 95px;
+    margin: 0 20px 20px 20px;
+    border-top: 1px dashed #d1d1d1;
+    position: relative;
+    min-height: 70px;
+    min-height: 75px;
+}
+
+.worklogs.first {
+    border-top: none;
+}
+
+.worklogs.no-worklog {
+    padding: 20px 0 0 20px;
+    font-size: 14px;
+    color: #999999;
+    min-height: 0;
+}
+
+.worklogs .title {
+    width: 68px;
+    height: 68px;
+    background: url("/components/calendar/images/date-bg.png") no-repeat 0 0;
+    position: absolute;
+    top: 12px;
+    left: 10px;
+}
+
+.worklogs.vocation .title {
+    background: url("/components/calendar/images/date-bg-vocation.png") no-repeat 0 0;
+}
+
+.worklogs .title .month {
+    color: #ffffff;
+    position: absolute;
+    top: 8px;
+    left: 25px;
+}
+
+.worklogs .title .date {
+    display: block;
+    width: 68px;
+    text-align: center;
+    color: #aaaaaa;
+    font-size: 30px;
+    position: absolute;
+    top: 29px;
+    left: 0;
+}
+
+.worklogs .title .weekday {
+    display: none;
+    color: #ffffff;
+    position: absolute;
+    top: 9px;
+    right: 12px;
+}
+
+.worklogs .member-worklog {
+    padding: 0 0 0 80px;
+    position: relative;
+}
+
+.worklogs .member-worklog .name {
+    display: block;
+    width: 70px;
+    height: 14px;
+    overflow: hidden;
+    text-align: center;
+    font-size: 14px;
+    line-height: 14px;
+    position: absolute;
+    top: 4px;
+    left: 0;
+}
+
+
+.worklog {
+    margin: 10px 0 0 0;
+    padding: 0 100px 0 100px;
+    position: relative;
+}
+
+.team-worklog .member-worklog .worklog {
+    margin: 15px 0 0 35px;
+}
+
+.worklogs .member-worklog .worklog {
+    padding-right: 40px;
+}
+
+.worklog .hour {
+    display: block;
+    line-height: 1.5;
+    font-size: 14px;
+    color: #aaaaaa;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.worklog .period {
+    display: block;
+    width: 48px;
+    height: 12px;
+    border: 1px solid #cccccc;
+    position: absolute;
+    top: 4px;
+    left: 35px;
+}
+
+.worklog .period span {
+    display: block;
+    height: 12px;
+    background: #cccccc;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.worklog .worklog-content {
+    line-height: 1.6;
+    font-size: 14px;
+    color: #000000;
+    position: relative;
+}
+
+.worklog .worklog-content .worklog-info {
+    display: inline-block;
+    margin: 0 0 0 10px;
+    white-space: nowrap;
+    position: relative;
+}
+
+.c-info{
+    display:inline;
+}
+.c-info span {
+    font-size: 12px;
+    color: #999;
+}
+.c-info span.tit {
+    padding-left:5px;
+}
+.worklog .worklog-content .labels {
+    color: #999999;
+    font-size: 12px;
+}
+
+.worklog .worklog-content .labels a {
+    color: #999999;
+}
+
+.worklog .worklog-content .comments {
+    display: block;
+    width: 50px;
+    height: 16px;
+    line-height: 16px;
+    color: #333333;
+    font-weight: bold;
+    position: absolute;
+    top: 3px;
+    right: -60px;
+}
+
+.worklog .worklog-content .comments img {
+    vertical-align: middle;
+    margin: 0 2px 0 0;
+}
+
+.worklog .worklog-content .comments.no-comment {
+    visibility: hidden;
+}
+
+.worklog.over .worklog-content .comments {
+    visibility: visible;
+}
+
+.worklog .worklog-content .comments:hover {
+    text-decoration: none;
+    opacity: 0.8;
+    filter: alpha(opacity = 80);
+}
+
+.content {
+    position: relative;
+}
+.worklogs-wrapper {
+    min-height: 400px;
+    overflow:auto;
+}
+.member-info {
+    background: none repeat scroll 0 0 #F3F3F3;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+    width: 220px;
+}
+.member-info .avatar {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    left: 15px;
+    padding: 2px;
+    position: absolute;
+    top: 15px;
+}
+.member-info .avatar img {
+    display: block;
+    height: 50px;
+    width: 50px;
+}
+.member-info .name {
+    border-bottom: 1px solid #CCCCCC;
+    color: #333333;
+    display: block;
+    font-size: 22px;
+    padding: 24px 0 8px 80px;
+}
+.member-info .name em {
+    display: block;
+    font-style: normal;
+    font-weight: normal;
+    height: 28px;
+    line-height: 28px;
+    overflow: hidden;
+    width: 130px;
+}
+.member-info .info-list {
+    border-top: 1px solid #F9F9F9;
+    padding: 25px 0 15px 15px;
+}
+.member-info .info-list li {
+    color: #333333;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0 0 5px;
+    overflow: hidden;
+    padding: 0 10px 0 20px;
+    white-space: nowrap;
+}
+.member-info .info-list li.no-phone {
+    color: #999999;
+    font-size: 12px;
+}
+.member-info .info-list li a {
+    color: #333333;
+}
+.member-info .info-list li a:hover {
+    color: #999999;
+    text-decoration: none;
+}
+.member-info .info-list li.phone {
+    background: url("/components/calendar/images/icon-small-phone.png") no-repeat scroll 0 2px transparent;
+}
+.member-info .info-list li.email {
+    background: url("/components/calendar/images/icon-small-email.png") no-repeat scroll 0 6px transparent;
+}
+
+
+.switch-worklog-views {
+    float: right;
+}
+.tour {
+    padding: 60px;
+}
+.tour .title {
+    font-size: 30px;
+}
+.tour .desc {
+    color: #666666;
+    font-size: 16px;
+    margin: 10px 0 0;
+}
+.tour .tour-img {
+    display: block;
+    height: 379px;
+    left: -15px;
+    margin: 30px 0;
+    position: relative;
+    width: 556px;
+}
+#back-to-top {
+    border-radius: 4px 0 0 0;
+    bottom: 0;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    color: #666666;
+    display: none;
+    height: 30px;
+    line-height: 30px;
+    position: fixed;
+    right: 300px;
+}
+#back-to-top:hover {
+    text-decoration: underline;
+}
+
+.scroll-loading {
+    display: block;
+    width: 160px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    color: #999999;
+    background: #eeeeee;
+    margin: 20px auto;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.scroll-loading:hover {
+    background: #f1f1f1;
+    text-decoration: none;
+}
+
+.scroll-loading.loading {
+    background: #eeeeee;
+    cursor: default;
+}
+
+
+#noCalendar{
+    text-align:center;
+    line-height:40px;
+    font-size:30px;
+    font-weight:700;
+}
+
+#loading{
+    width:100%;
+    display:none;
+    height:50px;
+    font-size:20px;
+    text-align:center;
+    line-height:50px;
+}
+
+#calendarUserId{
+    color:#f00;
+}
+.top-bar h3 em{
+    float:right;
+}
+
+
+/*所有人 list*/
+
+#everyone-list{
+    padding:0 10px;
+}
+
+.list-cal {
+    height:25px;
+    background:url("/components/calendar/images/1-1.png") repeat-x bottom center;
+    border:1px solid #ccc;
+    border-top:none;
+    border-bottom:none;
+    clear:both;
+    position:relative;
+}
+.list-title{
+    border-top:1px solid #ccc;
+    height:30px;
+}
+.list-cal span{
+    background:url("/components/calendar/images/1-1.png") repeat-y right center;
+    height:25px;
+    line-height:25px;
+    display:block;
+    float:left;
+}
+.list-cal .odd{
+    background:url("/components/calendar/images/1-2.png") repeat-y right center;
+}
+.list-title span{
+    height:30px;
+    line-height:30px;
+}
+
+.worklog-views span.last{
+    background:none;
+}
+
+.list-cal span em{
+    font-style:normal;
+    color:#666;
+}
+
+.list-cal span.odd{
+
+}
+.list-cal span.every-time-slot{
+    position: relative;
+    background:none;
+}
+.list-cal span.every-time-slot em {
+    text-align:right;
+    position: absolute;
+    right:72%;
+    width:100%;
+    top:3px;
+}
+.list-title span.every-name{
+    background: none;
+}
+.time-position{
+    position:absolute;
+    color:#fff;
+    background:#000;
+    overflow:hidden;
+    text-align:center;
+    line-height:25px;
+    height:25px;
+    cursor: pointer;
+}
+.list-cal span.every-name{
+    width:80px;
+    overflow:hidden;
+}
+.hover-box{
+    width:100%;
+    min-height:60px;
+}
+.hover-box ul {
+    padding:5px;
+}
+.hover-box ul li{
+    min-height:25px;
+    line-height:25px;
+    overflow-x: hidden;
+}
+.hover-box ul li span.tit{
+    width:42px;
+    font-weight:bold;
+    float:left;
+}
+.hover-box ul li span.morning{
+    font-weight:bold;
+    float:left;
+}
+.hover-box ul li span.afternoon{
+    font-weight:bold;
+    float:left;
+}
+
+.hover-box ul li span.info{
+    float:left;
+}
+.hover-box ul li span.title{
+    font-size:14px;
+    width:100%;
+    text-indent:5px;
+    padding:2px 0px;
+    font-weight:bold;
+    -moz-user-select: none;
+    background: -moz-linear-gradient(center top , #F6F6F6, #EEEEEE) repeat scroll 0 0 transparent;
+    border-radius: 4px 4px 4px 4px;
+    color: #333333;
+}
+.hover-box ul li span.value {
+    width:92%;
+    padding:5px;
+    line-height:20px;
+    border:1px dashed #ccc;
+}
+/*所有人 week*/
+
+#everyone-week{
+    padding:0 10px;
+}
+.week-title{
+    height:30px;
+    border:1px solid #ccc;
+}
+.every-name{
+    float:left;
+    height:30px;
+    line-height:30px;
+    width:80px;
+    background:url("/components/calendar/images/1-1.png") repeat-y right center;
+    overflow:hidden;
+    text-align:center;
+}
+.week-date{
+    float:left;
+    height:30px;
+    overflow: hidden;
+    line-height:30px;
+    background:url("/components/calendar/images/1-1.png") repeat-y right center;
+    text-align:center;
+    position:relative;
+}
+.week-cal{
+    clear:both;
+    height:30px;
+    border-left:1px solid #ccc;
+    border-right:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+}
+.week-cal span{
+    position: absolute;
+    display:block;
+    height:30px;
+    cursor:pointer;
+    background:#000;
+    z-index: 100;
+}
+
+/*所有人本月*/
+#everyone-month{
+    padding:0 10px;
+}
+
+.month-title{
+    height:30px;
+    border:1px solid #ccc;
+}
+.month-date{
+    float:left;
+    height:30px;
+    overflow: hidden;
+    line-height:30px;
+    background:url("/components/calendar/images/1-1.png") repeat-y right center;
+    text-align:center;
+    position:relative;
+}
+.worklog-views div.active{
+    font-weight: bold;
+}
+
+.worklog-views div.last{
+    background:none;
+}
+.month-cal{
+    clear:both;
+    height:30px;
+    border-left:1px solid #ccc;
+    border-right:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+}
+.month-cal span{
+    position: absolute;
+    display:block;
+    height:30px;
+    cursor:pointer;
+    background:#000;
+}
+/*图示*/
+#calendarIcon{
+    position:absolute;
+    left:10px;
+    bottom:20px;
+    padding:8px;
+    border:1px dashed #0081C2;
+    z-index:100;
+}
+
+#calendarIcon li{
+    float:left;
+    height:10px;
+}
+#calendarIcon li span.icon_name {
+    display:block;
+    float:left;
+    text-align:right;
+    width:60px;
+    height:12px;
+    line-height:12px;
+}
+#calendarIcon li span.icon_bg {
+    display:block;
+    float:left;
+    margin-left:5px;
+    width:60px;
+    height:10px;
+}
+.signin{
+    margin-left: 2px;
+    cursor: pointer;
+}
+.weeksignin{
+    left:0px;
+    position: absolute;
+    z-index: 200;
+    cursor: pointer;
+}
