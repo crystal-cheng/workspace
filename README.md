@@ -5,3 +5,4 @@
 ### 3. linux  linux学习记录
 ### 4. mapEcharts  echarts地图支持上钻下钻实现
 ### 5. node-png  node生成12种类型图片实现 + reportable组件
+### 6. ele-vue vue构建仿饿了么前端项目
